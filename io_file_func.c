@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * file_transactions - gets the history file
+ * get_history_file - gets the history file
  * @info: parameter struct
  *
  * Return: allocated string containg history file
  */
 
-char *file_transactions(info_t *info)
+char *get_history_file(info_t *info)
 {
 	char *buf, *dir;
 
@@ -25,15 +25,15 @@ char *file_transactions(info_t *info)
 }
 
 /**
- * print_transactions - creates a file, or appends to an existing file
+ * write_history - creates a file, or appends to an existing file
  * @info: the parameter struct
  *
  * Return: 1 on success, else -1
  */
-int print_transactions(info_t *info)
+int write_history(info_t *info)
 {
 	ssize_t fd;
-	char *filename = file_transactions(info);
+	char *filename = get_history_file(info);
 	list_t *node = NULL;
 
 	if (!filename)
@@ -54,17 +54,17 @@ int print_transactions(info_t *info)
 }
 
 /**
- * input_transactions - reads history from file
+ * read_history - reads history from file
  * @info: the parameter struct
  *
  * Return: histcount on success, 0 otherwise
  */
-int input_transactions(info_t *info)
+int read_history(info_t *info)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
-	char *buf = NULL, *filename = file_transactions(info);
+	char *buf = NULL, *filename = get_history_file(info);
 
 	if (!filename)
 		return (0);
@@ -124,12 +124,12 @@ int build_history_list(info_t *info, char *buf, int linecount)
 }
 
 /**
- * count_transactions - renumbers the history linked list after changes
+ * renumber_history - renumbers the history linked list after changes
  * @info: Structure containing potential arguments. Used to maintain
  *
  * Return: the new histcount
  */
-int count_transactions(info_t *info)
+int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
 	int i = 0;
