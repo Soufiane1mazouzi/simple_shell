@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * _errinteger - converts a string to an integer
+ * _erratoi - converts a string to an integer
  * @s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  *       -1 on error
  */
-int _errinteger(char *s)
+int _erratoi(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
@@ -29,21 +29,21 @@ int _errinteger(char *s)
 }
 
 /**
- * output_error - prints an error message
+ * print_error - prints an error message
  * @info: the parameter & return info struct
  * @estr: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void output_error(info_t *info, char *estr)
+void print_error(info_t *info, char *estr)
 {
-	_inputstring(info->fname);
-	_inputstring(": ");
+	_eputs(info->fname);
+	_eputs(": ");
 	print_d(info->line_count, STDERR_FILENO);
-	_inputstring(": ");
-	_inputstring(info->argv[0]);
-	_inputstring(": ");
-	_inputstring(estr);
+	_eputs(": ");
+	_eputs(info->argv[0]);
+	_eputs(": ");
+	_eputs(estr);
 }
 
 /**
@@ -60,7 +60,7 @@ int print_d(int input, int fd)
 	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
-		__putchar = _printstderr;
+		__putchar = _eputchar;
 	if (input < 0)
 	{
 		_abs_ = -input;
@@ -86,14 +86,14 @@ int print_d(int input, int fd)
 }
 
 /**
- * number_clone - converter function, a clone of itoa
+ * convert_number - converter function, a clone of itoa
  * @num: number
  * @base: base
  * @flags: argument flags
  *
  * Return: string
  */
-char *number_clone(long int num, int base, int flags)
+char *convert_number(long int num, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
@@ -122,12 +122,12 @@ char *number_clone(long int num, int base, int flags)
 }
 
 /**
- * rm_undo - function replaces first instance of '#' with '\0'
+ * remove_comments - function replaces first instance of '#' with '\0'
  * @buf: address of the string to modify
  *
  * Return: Always 0;
  */
-void rm_undo(char *buf)
+void remove_comments(char *buf)
 {
 	int i;
 

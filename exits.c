@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- **_mvstrings - copies a string
+ **_strncpy - copies a string
  *@dest: the destination string to be copied to
  *@src: the source string
  *@n: the amount of characters to be copied
  *Return: the concatenated string
  */
-char *_mvstrings(char *dest, char *src, int n)
+char *_strncpy(char *dest, char *src, int n)
 {
 	int i, j;
 	char *s = dest;
@@ -31,13 +31,13 @@ char *_mvstrings(char *dest, char *src, int n)
 }
 
 /**
- **_concatstr - concatenates two strings
+ **_strncat - concatenates two strings
  *@dest: the first string
  *@src: the second string
  *@n: the amount of bytes to be maximally used
  *Return: the concatenated string
  */
-char *_concatstr(char *dest, char *src, int n)
+char *_strncat(char *dest, char *src, int n)
 {
 	int i, j;
 	char *s = dest;
